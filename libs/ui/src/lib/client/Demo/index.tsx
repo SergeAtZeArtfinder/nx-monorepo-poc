@@ -1,3 +1,5 @@
+'use client';
+
 export function Demo() {
   return (
     <div className="max-w-xl mx-auto">
