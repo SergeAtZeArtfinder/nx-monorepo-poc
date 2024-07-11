@@ -6,7 +6,9 @@ export default function HomePage() {
    */
   return (
     <>
-      <h1>NX Monorepo Polygon</h1>
+      <h1 className="my-4 text-3xl text-center font-bold underline">
+        NX Monorepo Polygon
+      </h1>
     </>
   );
 }
