@@ -566,8 +566,10 @@ modules into my next.js application AND try to build - the build fails with weir
 
 - so the only way I have managed to have a workable and importable utils library is to generate it with `@nx:next`
 
-1. `nx g @nx/next:lib utils --directory=libs/utils`
-2. then replace the `.tsx` modules by `.ts`
+1. `nx g @nx/next:lib utils --directory=libs`
+2. Which stylesheet format would you like to use? · none
+3. What should be the project name and where should it be generated? · utils @ libs/utils ( Press SPACE bar once to select `Derived: libs/utils`)
+4. then replace the `.tsx` modules by `.ts`
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
