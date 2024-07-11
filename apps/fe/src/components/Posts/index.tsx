@@ -1,4 +1,5 @@
 import { type Post, PostsList } from '@nx-monorepo-polygon/components/server';
+import { isNullOrUndefined } from '@nx-monorepo-polygon/utils';
 
 const fetchPosts = async (
   max: number
@@ -25,7 +26,7 @@ const fetchPosts = async (
 const Posts = async () => {
   const [posts, fetchError] = await fetchPosts(8);
 
-  if (fetchError || !posts) {
+  if (!isNullOrUndefined(fetchError) || isNullOrUndefined(posts)) {
     return (
       <p className="col-[2/3] text-red font-semibold text-center my-4">
         {fetchError}
