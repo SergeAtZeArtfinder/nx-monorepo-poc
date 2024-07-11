@@ -121,7 +121,7 @@ it may show occasionally the failure related to such directories as
 
 1. remove all jest related packages
 2. $ `nx add @nx/vite`
-3. $ `npx nx g @nx/vite:vitest --project=nx-react-monorepo --testEnvironment=jsdom --uiFramework=react`
+3. $ `npx nx g @nx/vite:vitest --project=fe --testEnvironment=jsdom --uiFramework=react`
 4. Install testing dependencies for React, Vite and Canvas
 
 - $ `yarn add -D @testing-library/react @testing-library/jest-dom @vitejs/plugin-react vite-tsconfig-paths vitest-canvas-mock`

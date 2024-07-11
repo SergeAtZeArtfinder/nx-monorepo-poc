@@ -1,9 +1,8 @@
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom';
 
-import Posts from '../../src/components/Posts';
+import Posts from '../../../src/components/Posts';
 
-const mockFetch = jest.fn();
+const mockFetch = vi.fn();
 global.fetch = mockFetch;
 
 describe('Posts', () => {

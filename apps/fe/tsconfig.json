@@ -17,8 +17,11 @@
       }
     ],
     "types": [
-      "jest",
-      "node"
+      "node",
+      "vitest/globals",
+      "vitest/importMeta",
+      "vite/client",
+      "vitest"
     ]
   },
   "include": [
@@ -31,10 +34,5 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "vite.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
