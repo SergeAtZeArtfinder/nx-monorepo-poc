@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@nx-monorepo-polygon/components": ["libs/ui/src/index.ts"],
-      "@nx-monorepo-polygon/components/server": ["libs/ui/src/server.ts"]
+      "@nx-monorepo-polygon/components/server": ["libs/ui/src/server.ts"],
+      "@nx-monorepo-polygon/utils": ["libs/utils/src/index.ts"],
+      "@nx-monorepo-polygon/utils/server": ["libs/utils/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
