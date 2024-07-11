@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-monorepo-polygon/components": ["libs/ui/src/index.ts"],
+      "@nx-monorepo-polygon/components/server": ["libs/ui/src/server.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
