@@ -117,6 +117,124 @@ it may show occasionally the failure related to such directories as
 - `.nx` => if so run `nx reset` it will flush the old cached files
 - `/apps/nx-react-monorepo/.next/...` or `/apps/nx-react-monorepo/out/...` - delete these directories and re-run the tests.
 
+### Setup Testing with Vite
+
+1. remove all jest related packages
+2. $ `nx add @nx/vite`
+3. $ `npx nx g @nx/vite:vitest --project=nx-react-monorepo --testEnvironment=jsdom --uiFramework=react`
+4. Install testing dependencies for React, Vite and Canvas
+
+- $ `yarn add -D @testing-library/react @testing-library/jest-dom @vitejs/plugin-react vite-tsconfig-paths vitest-canvas-mock`
+
+That's a lot of dependencies 😄 , so let's break them down:
+
+- `"@testing-library/react"`: A library for testing React components. It provides utilities to simulate user interactions and query elements in a way that's more aligned with how users interact with your app.
+
+- `"@testing-library/jest-dom"`: A set of custom matchers that makes it easier to assert how your components should behave in the DOM.
+
+- `"@vitejs/plugin-react"`: The official Vite plugin to support React. This plugin enables features like Fast Refresh in a Vite + React development setup.
+
+- `"vite-tsconfig-paths"`: A Vite plugin that enables support for TypeScript's paths and baseUrl configuration options. This is useful when you want to set up custom path aliases in a TypeScript project using Vite.
+
+- `"vitest-canvas-mock"`: Mocks the canvas API when running unit tests with vitest.
+
+5. Add a test setup file
+
+```ts
+import { afterEach, expect } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import * as matchers from '@testing-library/jest-dom/matchers';
+// Option for using mocking canvas testing
+import 'vitest-canvas-mock';
+
+expect.extend(matchers);
+
+// runs a cleanup after each test case (e.g. clearing jsdom)
+afterEach(() => {
+  cleanup();
+});
+
+// Add Default Functions, for example providers as here:
+// https://testing-library.com/docs/react-testing-library/setup/#custom-render
+
+/* eslint-disable @typescript-eslint/no-empty-function */
+const noop = () => {};
+Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });
+```
+
+6. Update Vite Config to support test setup and reference libraries in MonoRepo
+
+```ts
+/// <reference types='vitest' />
+/// <reference types="vite/client" />
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+
+export default defineConfig({
+  root: __dirname,
+  cacheDir: '../../node_modules/.vite/apps/nx-react-monorepo',
+
+  plugins: [react(), nxViteTsPaths()],
+
+  // Uncomment this if you are using workers.
+  // worker: {
+  //  plugins: [ nxViteTsPaths() ],
+  // },
+
+  test: {
+    root: __dirname,
+    globals: true,
+    cache: {
+      dir: '../../node_modules/.vitest',
+    },
+    environment: 'jsdom',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}', '__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    deps: {
+      // Required for vitest-canvas-mock
+      inline: ['vitest-canvas-mock'],
+    },
+    setupFiles: ['./test-setup.ts'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../coverage/apps/nx-react-monorepo',
+      provider: 'v8',
+    },
+  },
+});
+```
+
+7. make sure the project.json config reflects the test command:
+
+```json
+{
+  "name": "nx-react-monorepo",
+  // ...
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:test",
+      "options": {
+        "config": "apps/nx-react-monorepo/vitest.config.ts"
+      },
+      "configurations": {
+        "watch": {
+          "watch": true
+        }
+      }
+    }
+  }
+}
+```
+
+8. then you can write unit tests in `nx-react-monorepo/__tests/` directory
+9. $ `nx test nx-react-monorepo`
+
+docs:
+
+- https://vitest.dev/guide/migration#migrating-from-jest
+- https://vitest.dev/config/#globals
+
 ### E2E Cypress
 
 - runs well locally in both dev/prod modes.
