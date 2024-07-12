@@ -592,6 +592,79 @@ npm uninstall @storybook/testing-library @storybook/test-runner @storybook/jest
 
 3. Tailwind css - you'll need to import the `globals.css` file into `libs/ui/.storybook/preview.ts` and it should work. ( if any questions - more is here [Storubook/Tailwind Setup Docs](https://storybook.js.org/recipes/tailwindcss) )
 
+### Add Pre-Commit checks with Husky
+
+1. Initiate and install, from your monorepo root dir
+
+```sh
+npx husky-init && npm install
+```
+
+2. Go to: `.husky/pre-commit` , add some scripts to run on pre-commit phase.
+
+```sh
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo ' 🏗️👷 Pre-commit checks: Styling, testing and building your project.'
+
+
+echo '👩‍🔬 Formatting checks...'
+nx affected -t format:check ||
+(
+    echo '🤢🤮🤢🤮 Your formatting fails. 🤢🤮🤢🤮
+           Run `nx affected -t format:write` to format your code and try commit again.';
+    false;
+)
+
+
+echo '👩‍🔬👀 ESLint checks...'
+nx affected -t lint ||
+(
+    echo '🤢🤮🤢🤮 Your ESLint code styling fails. 🤢🤮🤢🤮
+           Run `nx affected -t lint` to check your code style, apply fixes and try commit again.';
+    false;
+)
+
+echo '🛠️⚙️ TypeScript types check...'
+nx affected -t typecheck ||
+(
+    echo '🤡😂❌🤡 Failed TS Type check. 🤡😂❌🤡
+            Are you seriously trying to write that? Run `nx affected -t typecheck `, make the changes required and try commit again.'
+    false;
+)
+
+
+echo ' 🏃‍♀️🏃‍♂️🏃🏽 Running unit tests...'
+nx affected -t test ||
+(
+    echo '🤡😂❌💥 Kaboom!!! Failed Unit tests. 💥🤡❌🤡
+            Seriously 😜? Run `nx affected -t test`. Apply fixes and try commit again.'
+    false;
+)
+
+
+echo ' 🐌🐌🐌 Running End-to-end tests...'
+nx affected --parallel 1 -t e2e-ci  ||
+(
+    echo '🤡😂😜😜 Ha! Failed E2E tests. 🤡😂😜😜
+            Well 😜, check your ui changes - maybe not your fault. Run again `nx affected -t e2e --ui` with UI option. Apply fixes if needed and try commit again.'
+    false;
+)
+
+
+echo ' 🏗️👷🛠️ Making production build...'
+nx run fe:build ||
+(
+    echo '❌👷🔨❌ Better call Bob Marley... Because the app build has failed ❌👷🔨❌
+            Try to re-build `nx run fe:build`, then check for errors to see why.
+    '
+    false;
+)
+
+echo '✅✅✅✅ You are Great! 👍 All checks passed... I am committing this now. ✅✅✅✅ '
+```
+
 ## Integrate with editors
 
 Enhance your Nx experience by installing [Nx Console](https://nx.dev/nx-console) for your favourite editor. Nx Console
