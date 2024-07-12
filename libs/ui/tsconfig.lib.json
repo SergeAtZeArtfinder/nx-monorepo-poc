@@ -10,6 +10,14 @@
       "@nx/next/typings/image.d.ts"
     ]
   },
-  "exclude": ["vite.config.ts", "specs/**/*.spec.ts", "specs/**/*.spec.tsx"],
+  "exclude": [
+    "vite.config.ts",
+    "specs/**/*.spec.ts",
+    "specs/**/*.spec.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
+    "**/*.stories.tsx"
+  ],
   "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
 }

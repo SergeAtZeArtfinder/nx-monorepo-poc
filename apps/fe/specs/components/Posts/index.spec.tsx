@@ -26,4 +26,13 @@ describe('Posts', () => {
 
     expect(baseElement).toBeInTheDocument();
   });
+
+  it('should render list and list item', async () => {
+    const { getAllByRole, getByRole } = render(await Posts());
+    const list = getByRole('list');
+    const listItems = getAllByRole('listitem');
+
+    expect(list).toBeInTheDocument();
+    expect(listItems).toHaveLength(1);
+  });
 });
