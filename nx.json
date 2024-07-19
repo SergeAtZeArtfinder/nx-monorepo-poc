@@ -69,11 +69,24 @@
     "@nx/next": {
       "application": {
         "style": "css",
-        "linter": "eslint"
+        "linter": "eslint",
+        "pascalCaseFiles": true,
+        "unitTestRunner": "vitest"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint",
+        "pascalCaseFiles": true,
+        "unitTestRunner": "vitest"
       }
     },
     "@nx/react": {
-      "library": {}
+      "library": {
+        "style": "css",
+        "linter": "eslint",
+        "pascalCaseFiles": true,
+        "unitTestRunner": "vitest"
+      }
     }
   },
   "nxCloudAccessToken": ""

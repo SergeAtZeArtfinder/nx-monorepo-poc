@@ -12,6 +12,10 @@
 ✔ Default stylesheet format · css
 ✔ Do you want Nx Cloud to make your CI fast? · github
 
+### Generate application or library
+
+- best way to set all configurations right - is to use NX CONSOLE > Generate UI panel ( VSCode left side panel )
+
 ### TailwindCSS
 
 1. Install and configure Tailwind in an Nx workspace
@@ -116,6 +120,8 @@ it may show occasionally the failure related to such directories as
 
 - `.nx` => if so run `nx reset` it will flush the old cached files
 - `/apps/nx-react-monorepo/.next/...` or `/apps/nx-react-monorepo/out/...` - delete these directories and re-run the tests.
+
+2. IF NX console running with wrong node version: see here [Tasks running on old node version](https://github.com/nrwl/nx-console/issues/1893)
 
 ### Setup Testing with Vite
 
