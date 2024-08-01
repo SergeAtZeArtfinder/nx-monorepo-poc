@@ -671,6 +671,15 @@ nx run fe:build ||
 echo '✅✅✅✅ You are Great! 👍 All checks passed... I am committing this now. ✅✅✅✅ '
 ```
 
+### Publish Storybook to github pages
+
+Storybook published at: https://sergeatzeartfinder.github.io/nx-monorepo-poc
+
+Repository settings at https://github.com/SergeAtZeArtfinder/nx-monorepo-poc/settings/pages
+- select Source as `Github Actions`
+- follow articles: https://www.bitovi.com/blog/deploy-storybook-to-github-pages-with-github-actions
+- alternative articles: https://budiirawan.com/how-to-publish-storybook-github-pages/ , https://dev.to/kouts/deploy-storybook-to-github-pages-3bij
+
 ## Integrate with editors
 
 Enhance your Nx experience by installing [Nx Console](https://nx.dev/nx-console) for your favourite editor. Nx Console
