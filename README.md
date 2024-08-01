@@ -673,14 +673,20 @@ echo '✅✅✅✅ You are Great! 👍 All checks passed... I am committing this
 
 ### Publish Storybook to github pages
 
-- create branch `storybook-publish` - **IMPORTANT**: the publishing will run only from this branch name.
-- 
 Storybook published at: https://sergeatzeartfinder.github.io/nx-monorepo-poc
 
 Repository settings at https://github.com/SergeAtZeArtfinder/nx-monorepo-poc/settings/pages
 - select Source as `Github Actions`
 - follow articles: https://www.bitovi.com/blog/deploy-storybook-to-github-pages-with-github-actions
 - alternative articles: https://budiirawan.com/how-to-publish-storybook-github-pages/ , https://dev.to/kouts/deploy-storybook-to-github-pages-3bij
+
+#### Publishing Storybook, the usage:
+
+- make your ui library updates that is using the Storybook
+- create branch `"storybook-publish"` - **IMPORTANT**: the publishing will run only from this branch name.
+- push your `"storybook-publish"` branch, you can monitor your CI progress in Actions tab
+- when completed, your Storybook updated publish will be found at https://sergeatzeartfinder.github.io/nx-monorepo-poc
+- The URL to github pages can be found at your repo settings/pages tab
 
 ## Integrate with editors
 
