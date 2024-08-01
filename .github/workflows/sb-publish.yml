@@ -3,7 +3,7 @@ name: Storybook Publish
 on:
   push:
     branches:
-      - main
+      - storybook-publish
   pull_request:
 
 permissions:

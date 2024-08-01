@@ -673,6 +673,8 @@ echo '✅✅✅✅ You are Great! 👍 All checks passed... I am committing this
 
 ### Publish Storybook to github pages
 
+- create branch `storybook-publish` - **IMPORTANT**: the publishing will run only from this branch name.
+- 
 Storybook published at: https://sergeatzeartfinder.github.io/nx-monorepo-poc
 
 Repository settings at https://github.com/SergeAtZeArtfinder/nx-monorepo-poc/settings/pages
