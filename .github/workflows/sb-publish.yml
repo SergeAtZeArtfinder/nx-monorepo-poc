@@ -36,5 +36,5 @@ jobs:
         with:
           install_command: npm ci
           build_command: npx nx affected -t components:build-storybook
-          path: ./libs/ui/storybook-static # default: dist/storybook
+          path: dist/storybook
           checkout: false # default: true
