@@ -30,6 +30,9 @@ jobs:
 
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4
+
+      - name: Linting, testing
+        run: npx nx affected -t lint test
  
       #👇 Add Storybook build and deploy to GitHub Pages as a step in the workflow
       - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
