@@ -590,13 +590,13 @@ modules into my next.js application AND try to build - the build fails with weir
 nx g @nx/react:storybook-configuration components
 ```
 
-2. Probably it doesn't worth to keep tests inside the stories - as the same code is tested in the `specs/**/*.spec.tsx` , however if we choose such option- keep in mind must refactor to use storybook/vitest instead of jest. Keep in mind as well - that if we keep the `@storybook/testing-library` package - it will interfere with react testing library types in our unit test files. I have uninstalled these packages, because I do all testing within our unit tests files, and not planning to run the additional duplicate unit tests in the storybook.
+2. Probably it doesn't worth to keep tests inside the stories - as the same code is tested in the `specs/**/*.spec.tsx` , however if we choose such option- keep in mind must refactor to use storybook/vitest instead of jest. Keep in mind as well - that if we keep the `@storybook/testing-library` package - it may interfere with react testing library types in our unit test files. I have uninstalled `@storybook/jest` package, because I do all testing within our unit tests files, and not planning to run the additional duplicate unit tests in the storybook. However - it is still needs to be reviewed, good or not 😃.
 
 ```sh
-npm uninstall @storybook/testing-library @storybook/test-runner @storybook/jest
+npm uninstall @storybook/jest
 ```
 
-3. Tailwind css - you'll need to import the `globals.css` file into `libs/ui/.storybook/preview.ts` and it should work. ( if any questions - more is here [Storubook/Tailwind Setup Docs](https://storybook.js.org/recipes/tailwindcss) )
+3. Tailwind css - you'll need to import the `globals.css` file into `libs/ui/.storybook/preview.ts` and it should work. ( if any questions - more is here [Storybook/Tailwind Setup Docs](https://storybook.js.org/recipes/tailwindcss) )
 
 ### Add Pre-Commit checks with Husky
 
